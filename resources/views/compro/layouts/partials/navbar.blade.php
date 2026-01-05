@@ -81,13 +81,10 @@
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                         style="display: none;"
                         class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-xl py-2 text-gray-700 z-50 border-t-4 border-yellow-400">
-                        <a href="{{ url('profil/tentang-kami') }}"
+                        <a href="{{ route('profil.tentang-kami') }}"
                             class="{{ request()->is('profil/tentang-kami') ? 'bg-teal-50 text-teal-700 font-bold' : 'hover:bg-teal-50 hover:text-teal-700' }} block px-4 py-2 transition">Tentang
                             Kami</a>
-                        <a href="{{ url('profil/visi-misi') }}"
-                            class="{{ request()->is('profil/visi-misi') ? 'bg-teal-50 text-teal-700 font-bold' : 'hover:bg-teal-50 hover:text-teal-700' }} block px-4 py-2 transition">Visi
-                            & Misi</a>
-                        <a href="{{ url('profil/guru-staff') }}"
+                        <a href="{{ route('profil.tenaga-pendidik') }}"
                             class="{{ request()->is('profil/guru-staff') ? 'bg-teal-50 text-teal-700 font-bold' : 'hover:bg-teal-50 hover:text-teal-700' }} block px-4 py-2 transition">Guru
                             & Staff</a>
                     </div>
