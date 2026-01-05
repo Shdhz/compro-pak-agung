@@ -11,7 +11,7 @@ Route::prefix('profil')->group(function () {
     Route::get('/tentang-kami', function () {
          return view('compro.pages.profile');
     })->name('profil.tentang-kami');
-    Route::get('/tenaga-pendidik', function () {
+    Route::get('/guru-staff', function () {
          return view('compro.pages.employee');
     })->name('profil.tenaga-pendidik');
 

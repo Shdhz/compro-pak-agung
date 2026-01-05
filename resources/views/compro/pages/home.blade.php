@@ -1,6 +1,6 @@
 @extends('compro.layouts.app')
 
-@section('title', 'Beranda - SD Negri 1 Contoh')
+@section('title', 'Beranda - SD Negri 1')
 
 @section('content')
 
@@ -45,9 +45,9 @@
                     <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
                         <a href="#"
                             class="px-8 py-4 bg-yellow-400 text-teal-900 font-black rounded-xl shadow-[4px_4px_0px_0px_#115e59] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all duration-200">
-                            Daftar PPDB 2025
+                            Daftar PPDB 2026
                         </a>
-                        <a href="#"
+                        <a href="{{ route('profil.tentang-kami') }}"
                             class="px-8 py-4 bg-white text-teal-900 border-2 border-teal-900 font-bold rounded-xl hover:bg-teal-50 transition-colors duration-200">
                             Profil Sekolah
                         </a>
