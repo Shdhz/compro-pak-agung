@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('compro.pages.home');
-});
+})->name('home');
 
 Route::prefix('profil')->group(function () {
 
@@ -16,3 +16,19 @@ Route::prefix('profil')->group(function () {
     })->name('profil.tenaga-pendidik');
 
 });
+
+Route::get('berita', function(){
+    return view('compro.pages.news');
+})->name('berita');
+
+Route::get('berita/detail-berita', function(){
+    return view('compro.pages.detail_news');
+})->name('berita.detail');
+
+Route::get('galeri', function(){
+    return view('compro.pages.gallery');
+})->name('galeri');
+
+Route::get('info-ppdb', function(){
+    return view('compro.pages.ppdb_info');
+})->name('info-ppdb');

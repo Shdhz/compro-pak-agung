@@ -59,7 +59,7 @@
 
             <div class="hidden md:flex space-x-8 items-center">
 
-                <a href="{{ url('/') }}"
+                <a href="{{ route('home') }}"
                     class="{{ request()->is('/') ? 'text-yellow-300 font-bold border-b-2 border-yellow-300' : 'text-white hover:text-yellow-300 font-medium' }} transition pb-1">
                     Beranda
                 </a>
@@ -90,17 +90,17 @@
                     </div>
                 </div>
 
-                <a href="{{ url('berita') }}"
+                <a href="{{ route('berita') }}"
                     class="{{ request()->is('berita*') ? 'text-yellow-300 font-bold border-b-2 border-yellow-300' : 'text-white hover:text-yellow-300 font-medium' }} transition pb-1">
                     Berita
                 </a>
 
-                <a href="{{ url('galeri') }}"
+                <a href="{{ route('galeri') }}"
                     class="{{ request()->is('galeri*') ? 'text-yellow-300 font-bold border-b-2 border-yellow-300' : 'text-white hover:text-yellow-300 font-medium' }} transition pb-1">
                     Galeri
                 </a>
 
-                <a href="{{ url('ppdb') }}"
+                <a href="{{ route('info-ppdb') }}"
                     class="bg-yellow-400 text-teal-900 px-5 py-2 rounded-full font-bold hover:bg-yellow-300 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                     Info PPDB
                 </a>
