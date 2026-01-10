@@ -1,6 +1,6 @@
 @extends('compro.layouts.app')
 
-@section('title', 'Berita & Artikel - SD Negeri 1')
+@section('title', "Berita & Artikel - {$school['NAMA_SEKOLAH']}")
 
 @section('content')
 
@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <h1 class="text-4xl md:text-5xl font-black text-white mb-4">Kabar Sekolah</h1>
             <p class="text-teal-100 text-lg max-w-2xl mx-auto">
-                Informasi terbaru, prestasi siswa, dan artikel edukatif seputar kegiatan di SD Negeri 1 Contoh.
+                Informasi terbaru, prestasi siswa, dan artikel edukatif seputar kegiatan di {{ $school['NAMA_SEKOLAH'] }}.
             </p>
         </div>
     </section>

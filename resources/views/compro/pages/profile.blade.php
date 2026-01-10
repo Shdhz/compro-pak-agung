@@ -1,6 +1,6 @@
 @extends('compro.layouts.app')
 
-@section('title', 'Tentang Kami - SD Negeri 1 Contoh')
+@section('title', "Tentang Kami - {$school['NAMA_SEKOLAH']}")
 
 @section('content')
 
@@ -13,9 +13,9 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span class="text-yellow-400 font-bold tracking-wider uppercase text-sm mb-4 block">Profil Sekolah</span>
-            <h1 class="text-4xl md:text-6xl font-black text-white mb-6">Mengenal Lebih Dekat <br> SD Negeri 1 Contoh</h1>
+            <h1 class="text-4xl md:text-6xl font-black text-white mb-6">Mengenal Lebih Dekat <br> {{ $school['NAMA_SEKOLAH'] }}</h1>
             <p class="text-teal-100 text-lg max-w-2xl mx-auto leading-relaxed">
-                Berdiri sejak 1985, kami berkomitmen mencetak generasi unggul yang berakhlak mulia dan berwawasan global.
+                Berdiri sejak {{ $school['TAHUN_BERDIRI_SEKOLAH'] }}, kami berkomitmen mencetak generasi unggul yang berakhlak mulia dan berwawasan global.
             </p>
         </div>
     </section>
@@ -32,7 +32,7 @@
 
                         <div class="absolute top-6 left-6 bg-yellow-400 text-teal-900 p-4 rounded-xl shadow-lg text-center">
                             <span class="block text-xs font-bold uppercase">Berdiri Sejak</span>
-                            <span class="block text-3xl font-black">1985</span>
+                            <span class="block text-3xl font-black">{{ $school['TAHUN_BERDIRI_SEKOLAH'] }}</span>
                         </div>
                     </div>
                     <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-pattern-dots opacity-20 z-[-1]"></div>
@@ -47,33 +47,33 @@
                     <h2 class="text-3xl md:text-4xl font-black text-teal-900 leading-tight">
                         Dari Ruang Kelas Sederhana Menjadi Sekolah <span
                             class="text-yellow-500 underline decoration-4 decoration-yellow-200">Terakreditasi
-                            Unggul</span>.
+                            {{ $school['AKREDITASI_SEKOLAH'] }}</span>.
                     </h2>
 
                     <div class="prose prose-lg text-gray-600">
                         <p>
-                            SD Negeri 1 Contoh berawal dari inisiatif tokoh masyarakat setempat yang menginginkan pendidikan
+                            {{ $school['NAMA_SEKOLAH'] }} berawal dari inisiatif tokoh masyarakat setempat yang menginginkan pendidikan
                             berkualitas di lingkungan ini. Dimulai dengan hanya 3 ruang kelas dan 50 siswa, kini kami telah
                             berkembang menjadi salah satu sekolah rujukan di kota ini.
                         </p>
                         <p>
-                            Komitmen kami terhadap kualitas pendidikan dibuktikan dengan raihan <strong>Akreditasi A
-                                (Unggul)</strong> berturut-turut dari BAN-S/M, serta berbagai prestasi akademik dan
+                            Komitmen kami terhadap kualitas pendidikan dibuktikan dengan raihan <strong>Akreditasi {{ $school['AKREDITASI_HURUF_SEKOLAH'] }}
+                                ({{ $school['AKREDITASI_SEKOLAH'] }})</strong> berturut-turut dari BAN-S/M, serta berbagai prestasi akademik dan
                             non-akademik di tingkat provinsi maupun nasional.
                         </p>
                     </div>
 
                     <div class="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
                         <div class="text-center">
-                            <span class="block text-3xl font-black text-teal-900">35+</span>
+                            <span class="block text-3xl font-black text-teal-900">{{ $school['TOTAL_GURU_DAN_STAFF_SEKOLAH'] }}</span>
                             <span class="text-sm text-gray-500 font-medium">Guru & Staff</span>
                         </div>
                         <div class="text-center border-l border-gray-200">
-                            <span class="block text-3xl font-black text-teal-900">540</span>
+                            <span class="block text-3xl font-black text-teal-900">{{ $school['TOTAL_SISWA_AKTIF'] }}</span>
                             <span class="text-sm text-gray-500 font-medium">Siswa Aktif</span>
                         </div>
                         <div class="text-center border-l border-gray-200">
-                            <span class="block text-3xl font-black text-teal-900">2K+</span>
+                            <span class="block text-3xl font-black text-teal-900">{{ $school['TOTAL_ALUMNI_SEKOLAH'] }}</span>
                             <span class="text-sm text-gray-500 font-medium">Alumni</span>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                     </div>
                     <span class="text-teal-600 font-black text-xl mb-4 block tracking-widest uppercase">Visi Sekolah</span>
                     <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 leading-snug italic">
-                        "Terwujudnya Peserta Didik yang Beriman, Cerdas, Terampil, Mandiri dan Berwawasan Lingkungan."
+                        "{{ $school['VISI_SEKOLAH'] }}"
                     </h3>
                 </div>
 
@@ -117,6 +117,10 @@
                     <span class="text-yellow-400 font-black text-xl mb-6 block tracking-widest uppercase">Misi
                         Sekolah</span>
                     <ul class="space-y-4">
+                        @php
+                            $missions = explode(".", $school['MISI_SEKOLAH']);
+                        @endphp
+                        @foreach ($missions as $item)
                         <li class="flex items-start gap-3">
                             <span class="mt-1 bg-yellow-400 p-1 rounded-full shrink-0">
                                 <svg class="w-3 h-3 text-teal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,38 +128,9 @@
                                         d="M5 13l4 4L19 7" />
                                 </svg>
                             </span>
-                            <span class="text-teal-50">Menanamkan keimanan dan ketaqwaan melalui pengamalan ajaran
-                                agama.</span>
+                            <span class="text-teal-50">{{ $item }}.</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <span class="mt-1 bg-yellow-400 p-1 rounded-full shrink-0">
-                                <svg class="w-3 h-3 text-teal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7" />
-                                </svg>
-                            </span>
-                            <span class="text-teal-50">Melaksanakan pembelajaran Aktif, Inovatif, Kreatif, Efektif dan
-                                Menyenangkan.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="mt-1 bg-yellow-400 p-1 rounded-full shrink-0">
-                                <svg class="w-3 h-3 text-teal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7" />
-                                </svg>
-                            </span>
-                            <span class="text-teal-50">Mengembangkan bakat dan minat siswa melalui kegiatan
-                                ekstrakurikuler.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="mt-1 bg-yellow-400 p-1 rounded-full shrink-0">
-                                <svg class="w-3 h-3 text-teal-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7" />
-                                </svg>
-                            </span>
-                            <span class="text-teal-50">Mewujudkan sekolah yang bersih, hijau, dan sehat.</span>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('compro.layouts.app')
 
-@section('title', 'Tenaga Pendidik & Staff - SD Negeri 1')
+@section('title', "Tenaga Pendidik & Staff - {$school['NAMA_SEKOLAH']}")
 
 @section('content')
 
@@ -98,7 +98,7 @@
                         <span class="text-[10px] font-bold bg-white/40 px-2 py-1 rounded-lg">Total</span>
                     </div>
                     <div>
-                        <h4 class="font-black text-4xl md:text-5xl mb-1">32</h4>
+                        <h4 class="font-black text-4xl md:text-5xl mb-1">{{ $school['TOTAL_GURU_DAN_STAFF_SEKOLAH'] }}</h4>
                         <p class="font-bold text-xs md:text-sm leading-tight opacity-90">Guru & Staff <br>Profesional</p>
                     </div>
                 </div>

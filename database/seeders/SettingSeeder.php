@@ -53,10 +53,6 @@ class SettingSeeder extends Seeder
                 'value' => 'Kepala Sekolah Berprestasi 2024',
             ],
             [
-                'key' => 'RINGKASAN_SEKOLAH',
-                'value' => 'Mewujudkan generasi penerus bangsa yang cerdas secara intelektual, matang secara emosional, dan mulia secara spiritual.',
-            ],
-            [
                 'key' => 'TAHUN_BERDIRI_SEKOLAH',
                 'value' => '1985',
             ],
@@ -82,7 +78,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'MISI_SEKOLAH',
-                'value' => 'Menanamkan keimanan dan ketaqwaan melalui pengamalan ajaran agama. Melaksanakan pembelajaran Aktif, Inovatif, Kreatif, Efektif dan Menyenangkan. Mengembangkan bakat dan minat siswa melalui kegiatan ekstrakurikuler. Mewujudkan sekolah yang bersih, hijau, dan sehat.',
+                'value' => 'Menanamkan keimanan dan ketaqwaan melalui pengamalan ajaran agama. Melaksanakan pembelajaran Aktif, Inovatif, Kreatif, Efektif dan Menyenangkan. Mengembangkan bakat dan minat siswa melalui kegiatan ekstrakurikuler. Mewujudkan sekolah yang bersih, hijau, dan sehat',
             ],
             [
                 'key' => 'LOGO_SEKOLAH',

@@ -1,6 +1,6 @@
 @extends('compro.layouts.app')
 
-@section('title', 'Galeri Sekolah - SD Negeri 1 Contoh')
+@section('title', "Galeri Sekolah - {$school['NAMA_SEKOLAH']}")
 
 @section('content')
 

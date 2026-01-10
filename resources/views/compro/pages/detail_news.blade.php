@@ -1,9 +1,8 @@
 @extends('compro.layouts.app')
 
-@section('title', 'Meriah! Pentas Seni Tahunan - SD Negeri 1 Contoh')
+@section('title', "Meriah! Pentas Seni Tahunan - {$school['NAMA_SEKOLAH']}")
 
 @section('content')
-
     <div class="bg-teal-50 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex text-sm font-medium text-gray-500">

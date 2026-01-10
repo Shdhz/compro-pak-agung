@@ -21,8 +21,8 @@ class TeacherSeeder extends Seeder
         ]);
         Teacher::create([
             'nama' => 'Ibu Sarah, S.Pd.',
-            'jabatan' => 'Kepala Sekolah',
-            'jabatan_spesifik' => 'Kepala Sekolah',
+            'jabatan' => 'Staff',
+            'jabatan_spesifik' => 'Kurikulum',
         ]);
         Teacher::create([
             'nama' => 'Bpk. Hartono',

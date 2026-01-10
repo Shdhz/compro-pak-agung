@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Compro\ComproController;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(ComproController::class)->name('compro.')->group(function () {
+Route::controller(ComproController::class)->name('compro.')->middleware('school')->group(function () {
     Route::get('/', 'home')->name('home');
     Route::prefix('profil')->group(function () {
         Route::get('tentang-kami', 'aboutUs')->name('about-us');
@@ -38,7 +38,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('facility', FacilityController::class);
     Route::resource('gallery', GalleryController::class);
     Route::resource('news', NewsController::class);
-    Route::controller(AdminController::class)->group(function(){
+    Route::controller(AdminController::class)->group(function () {
         Route::get('edit-profile', 'editProfile')->name('profile');
         Route::put('edit-profile', 'updateProfile')->name('update-profile');
         Route::put('edit-password', 'updatePassword')->name('update-password');
