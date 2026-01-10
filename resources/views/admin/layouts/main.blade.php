@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>{{ $title }}</title>
+    <title>{{ $title ?? 'Company Profile' }}</title>
     <!-- CSS files -->
     <link href="/assets/css/tabler.min.css" rel="stylesheet" />
     <link href="/assets/css/tabler-flags.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
     <script src="/assets/js/demo-theme.min.js"></script>
     <div class="page">
         <!-- Navbar -->
-        @include('layouts.partials.navbar')
+        @include('admin.layouts.partials.navbar')
 
         <div class="page-wrapper">
             <!-- Page header -->
@@ -41,7 +41,7 @@
                     @yield('content')
                 </div>
             </div>
-            @include('layouts.partials.footer')
+            @include('admin.layouts.partials.footer')
         </div>
     </div>
     
