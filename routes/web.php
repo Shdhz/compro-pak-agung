@@ -1,38 +1,20 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Compro\ComproController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('compro.pages.home');
-})->name('home');
-
-Route::prefix('profil')->group(function () {
-
-    Route::get('/tentang-kami', function () {
-        return view('compro.pages.profile');
-    })->name('profil.tentang-kami');
-    Route::get('/tenaga-pendidik', function () {
-        return view('compro.pages.employee');
-    })->name('profil.tenaga-pendidik');
+Route::controller(ComproController::class)->name('compro.')->group(function () {
+    Route::get('/', 'home')->name('home');
+    Route::prefix('profil')->group(function(){
+        Route::get('tentang-kami', 'aboutUs')->name('about-us');
+        Route::get('tenaga-pendidik', 'teacher')->name('teacher');
+    });
+    Route::get('berita', 'news')->name('news');
+    Route::get('berita/{slug}', 'readNews')->name('read-news');
+    Route::get('galeri', 'gallery')->name('gallery');
+    Route::get('info-ppdb', 'infoPPDB')->name('info-ppdb');
 });
-
-Route::get('berita', function () {
-    return view('compro.pages.news');
-})->name('berita');
-
-Route::get('berita/detail-berita', function () {
-    return view('compro.pages.detail_news');
-})->name('berita.detail');
-
-Route::get('galeri', function () {
-    return view('compro.pages.gallery');
-})->name('galeri');
-
-Route::get('info-ppdb', function () {
-    return view('compro.pages.ppdb_info');
-})->name('info-ppdb');
-
 
 // admin
 Route::prefix('admin')->name('admin.')->group(function () {
