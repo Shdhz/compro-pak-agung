@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->index();
-            $table->string('value');
+            $table->string('key')->index()->unique();
+            $table->text('value');
             $table->timestamps();
         });
     }
