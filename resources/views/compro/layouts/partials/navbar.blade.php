@@ -59,7 +59,7 @@
 
             <div class="hidden md:flex space-x-8 items-center">
 
-                <a href="{{ route('home') }}"
+                <a href="{{ route('compro.home') }}"
                     class="{{ request()->is('/') ? 'text-yellow-300 font-bold border-b-2 border-yellow-300' : 'text-white hover:text-yellow-300 font-medium' }} transition pb-1">
                     Beranda
                 </a>
@@ -81,26 +81,26 @@
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                         style="display: none;"
                         class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-xl py-2 text-gray-700 z-50 border-t-4 border-yellow-400">
-                        <a href="{{ route('profil.tentang-kami') }}"
+                        <a href="{{ route('compro.about-us') }}"
                             class="{{ request()->is('profil/tentang-kami') ? 'bg-teal-50 text-teal-700 font-bold' : 'hover:bg-teal-50 hover:text-teal-700' }} block px-4 py-2 transition">Tentang
                             Kami</a>
-                        <a href="{{ route('profil.tenaga-pendidik') }}"
+                        <a href="{{ route('compro.teacher') }}"
                             class="{{ request()->is('profil/guru-staff') ? 'bg-teal-50 text-teal-700 font-bold' : 'hover:bg-teal-50 hover:text-teal-700' }} block px-4 py-2 transition">Guru
                             & Staff</a>
                     </div>
                 </div>
 
-                <a href="{{ route('berita') }}"
+                <a href="{{ route('compro.news') }}"
                     class="{{ request()->is('berita*') ? 'text-yellow-300 font-bold border-b-2 border-yellow-300' : 'text-white hover:text-yellow-300 font-medium' }} transition pb-1">
                     Berita
                 </a>
 
-                <a href="{{ route('galeri') }}"
+                <a href="{{ route('compro.gallery') }}"
                     class="{{ request()->is('galeri*') ? 'text-yellow-300 font-bold border-b-2 border-yellow-300' : 'text-white hover:text-yellow-300 font-medium' }} transition pb-1">
                     Galeri
                 </a>
 
-                <a href="{{ route('info-ppdb') }}"
+                <a href="{{ route('compro.info-ppdb') }}"
                     class="bg-yellow-400 text-teal-900 px-5 py-2 rounded-full font-bold hover:bg-yellow-300 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                     Info PPDB
                 </a>

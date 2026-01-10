@@ -52,7 +52,7 @@
                             Kegiatan pentas seni tahun ini menampilkan berbagai bakat siswa mulai dari tari tradisional,
                             paduan suara, hingga drama musikal. Acara dihadiri oleh pejabat dinas pendidikan setempat...
                         </p>
-                        <a href="{{ route('berita.detail') }}"
+                        <a href="{{ route('compro.read-news') }}"
                             class="inline-flex items-center gap-2 text-teal-700 font-bold hover:gap-3 transition-all">
                             Baca Selengkapnya <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

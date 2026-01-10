@@ -228,7 +228,7 @@
             </div>
 
             <div class="mt-12 text-center">
-                <a href="{{ route('profil.tenaga-pendidik') }}"
+                <a href="{{ route('compro.teacher') }}"
                     class="inline-block border-b-2 border-teal-600 text-teal-600 font-bold hover:text-teal-800 hover:border-teal-800 transition pb-1">Lihat
                     Seluruh Tenaga Pendidik &rarr;</a>
             </div>
