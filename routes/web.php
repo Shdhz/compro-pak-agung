@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Compro\ComproController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,11 @@ Route::controller(ComproController::class)->name('compro.')->group(function () {
     Route::get('berita/{slug}', 'readNews')->name('read-news');
     Route::get('galeri', 'gallery')->name('gallery');
     Route::get('info-ppdb', 'infoPPDB')->name('info-ppdb');
+});
+
+Route::controller(LoginController::class)->name('login.')->group(function(){
+    Route::get('login', 'login')->name('login');
+    Route::post('login', 'createSession')->name('create-session');
 });
 
 // admin

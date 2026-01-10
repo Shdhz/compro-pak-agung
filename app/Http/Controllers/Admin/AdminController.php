@@ -11,6 +11,6 @@ class AdminController extends Controller
     {
         $title = 'Dashboard Admin';
 
-        return view('admin.dashboard', compact('title'));
+        return view('admin.pages.dashboard', compact('title'));
     }
 }
