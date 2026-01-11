@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Compro;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Facility;
 use App\Models\Galery;
 use App\Models\News;
@@ -43,14 +44,62 @@ class ComproController extends Controller
         return view('compro.pages.employee', compact('kepalaSekolah', 'kurikulum', 'kepalaTU', 'teachers', 'categories'));
     }
 
-    public function news()
+    public function news(Request $request)
     {
-        return view('compro.pages.news');
+        $headline = News::with(['category', 'user'])->latest()->first();
+        $query = News::with(['category', 'user']);
+
+        if ($headline) {
+            $query->where('id', '!=', $headline->id);
+        }
+
+        if ($request->has('q')) {
+            $query->where('judul', 'like', '%' . $request->q . '%');
+        }
+
+        if ($request->has('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
+        }
+
+        $news_list = $query->latest()->paginate(6);
+
+        $categories = Category::withCount('news')->get();
+        $popular_news = News::with('category')->latest()->take(5)->get();
+        $allTags = News::whereNotNull('tags')->get()->pluck('tags')->flatten()->unique()->take(15);
+
+
+        return view('compro.pages.news', compact(
+            'headline',
+            'news_list',
+            'categories',
+            'popular_news',
+            'allTags'
+        ));
     }
 
-    public function readNews()
+    public function readNews($slug)
     {
-        return view('compro.pages.detail_news');
+        $news = News::with(['category', 'user'])
+            ->where('slug', $slug)
+            ->firstOrFail(); 
+
+        $related_news = News::where('category_id', $news->category_id)
+            ->where('id', '!=', $news->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        $categories = Category::withCount('news')->get();
+        $popular_news = News::with('category')->latest()->take(5)->get(); 
+
+        return view('compro.pages.detail_news', compact(
+            'news',
+            'related_news',
+            'categories',
+            'popular_news'
+        ));
     }
 
     public function gallery()
