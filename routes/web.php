@@ -12,19 +12,17 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Compro\ComproController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('compro.pages.home');
-})->name('home');
-
-Route::prefix('profil')->group(function () {
-
-    Route::get('/tentang-kami', function () {
-         return view('compro.pages.profile');
-    })->name('profil.tentang-kami');
-    Route::get('/tenaga-pendidik', function () {
-         return view('compro.pages.employee');
-    })->name('profil.tenaga-pendidik');
-
+Route::controller(ComproController::class)->name('compro.')->middleware('school')->group(function () {
+    Route::get('/', 'home')->name('home');
+    Route::prefix('profil')->group(function () {
+        Route::get('tentang-kami', 'aboutUs')->name('about-us');
+        Route::get('tenaga-pendidik', 'teacher')->name('teacher');
+    });
+    Route::get('berita', 'news')->name('news');
+    Route::get('berita/{slug}', 'readNews')->name('read-news');
+    Route::get('galeri', 'gallery')->name('gallery');
+    Route::get('load-more-galeri', 'loadMore')->name('load-more');
+    Route::get('info-ppdb', 'infoPPDB')->name('info-ppdb');
 });
 
 Route::controller(LoginController::class)->middleware('guest')->group(function () {
