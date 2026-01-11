@@ -1,43 +1,43 @@
-FROM php:8.2-fpm
+FROM php:8.2-apache
 
-# Install system deps + Node.js
+# Install dependencies sistem & driver PostgreSQL (libpq-dev)
 RUN apt-get update && apt-get install -y \
-    nginx \
-    git \
-    unzip \
     libpng-dev \
-    libonig-dev \
-    libxml2-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     zip \
-    curl \
-    nodejs \
-    npm
+    unzip \
+    libpq-dev \
+    git \
+    curl
 
-# PHP Extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+# Install ekstensi PHP: pdo_pgsql (Wajib buat Postgres)
+RUN docker-php-ext-install pdo pdo_pgsql gd
 
-# Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Aktifkan mod_rewrite Apache
+RUN a2enmod rewrite
 
-WORKDIR /var/www
+# Set working directory
+WORKDIR /var/www/html
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copy file composer
+COPY composer.json composer.lock ./
+
+# Install library (Tanpa dev dependencies biar ringan)
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+# Copy seluruh source code
 COPY . .
 
-# PHP deps
-RUN composer install --no-dev --optimize-autoloader
+# Atur permission storage (Penting!)
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Frontend build 
-RUN npm install && npm run build
-
-# Permission
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 775 storage bootstrap/cache
-
-# Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Entrypoint
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# Ubah DocumentRoot ke public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 EXPOSE 80
-ENTRYPOINT ["docker-entrypoint.sh"]
