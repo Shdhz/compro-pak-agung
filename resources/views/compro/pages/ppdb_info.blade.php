@@ -1,6 +1,6 @@
 @extends('compro.layouts.app')
 
-@section('title', 'Info PPDB 2025/2026 - SD Negeri 1 Contoh')
+@section('title', "Info PPDB - {$school['NAMA_SEKOLAH']}")
 
 @section('content')
 
