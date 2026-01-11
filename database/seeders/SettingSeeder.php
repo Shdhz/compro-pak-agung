@@ -85,6 +85,10 @@ class SettingSeeder extends Seeder
                 'value' => '',
             ],
             [
+                'key' => 'FOTO_SEKOLAH',
+                'value' => 'https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            ],
+            [
                 'key' => 'TELEPON_SEKOLAH',
                 'value' => '087737709694',
             ],

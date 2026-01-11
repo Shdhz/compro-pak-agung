@@ -37,7 +37,8 @@ $ppdbPeriod = $startYear . '/' . $endYear;
                         <span
                             class="text-[10px] font-bold text-teal-600 uppercase tracking-widest leading-tight">Terakreditasi
                             Nasional</span>
-                        <span class="text-xl font-black text-teal-900 leading-none">{{ $school['AKREDITASI_SEKOLAH'] }}</span>
+                        <span class="text-xl font-black text-teal-900 leading-none">{{ $school['AKREDITASI_SEKOLAH']
+                            }}</span>
                         <span class="text-[10px] text-gray-500 font-medium">Badan Akreditasi Nasional S/M</span>
                     </div>
                 </div>
@@ -189,7 +190,8 @@ $ppdbPeriod = $startYear . '/' . $endYear;
                 <div
                     class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4 text-2xl">
                     ⚽</div>
-                <h3 class="text-xl font-bold text-teal-900 mb-2">{{ $school['TOTAL_EKSKUL_SEKOLAH'] }} Ekstrakurikuler</h3>
+                <h3 class="text-xl font-bold text-teal-900 mb-2">{{ $school['TOTAL_EKSKUL_SEKOLAH'] }} Ekstrakurikuler
+                </h3>
                 <p class="text-gray-600 text-sm">Mulai dari Futsal, Tari, Pramuka, hingga Coding Kids.</p>
             </div>
 
@@ -262,66 +264,26 @@ $ppdbPeriod = $startYear . '/' . $endYear;
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach ($news as $item)
             <article class="flex flex-col group cursor-pointer">
                 <figure class="relative h-60 overflow-hidden rounded-2xl mb-4">
-                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                    <img src="{{ asset('storage/' . $item->thumbnail) }}"
                         alt="Upacara HUT RI di SD Negeri 1 Contoh"
                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
                     <div
                         class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold text-teal-800 shadow-sm">
-                        Kegiatan
+                        {{ $item->category->nama }}
                     </div>
                 </figure>
                 <div class="flex flex-col grow">
-                    <time datetime="2024-08-17" class="text-sm text-gray-400 font-medium mb-2">17 Agustus 2024</time>
+                    <time class="text-sm text-gray-400 font-medium mb-2">{{ $item->created_at->translatedFormat('d F Y') }}</time>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-teal-600 transition">
-                        <a href="#">Semangat Kemerdekaan: Upacara dan Lomba Tradisional Siswa</a>
+                        <a href="{{ route('compro.read-news', $item->slug) }}">{{ $item->judul }}</a>
                     </h3>
-                    <p class="text-gray-600 line-clamp-2 text-sm">Peringatan HUT RI berlangsung meriah dengan
-                        partisipasi seluruh warga sekolah dalam berbagai lomba ketangkasan.</p>
+                    <p class="text-gray-600 line-clamp-2 text-sm">{{ $item->summary }}</p>
                 </div>
             </article>
-
-            <article class="flex flex-col group cursor-pointer">
-                <figure class="relative h-60 overflow-hidden rounded-2xl mb-4">
-                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                        alt="Pramuka Juara"
-                        class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold text-teal-800 shadow-sm">
-                        Prestasi
-                    </div>
-                </figure>
-                <div class="flex flex-col grow">
-                    <time datetime="2024-09-10" class="text-sm text-gray-400 font-medium mb-2">10 September
-                        2024</time>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-teal-600 transition">
-                        <a href="#">Membanggakan! Tim Pramuka Raih Juara Umum Tingkat Kecamatan</a>
-                    </h3>
-                    <p class="text-gray-600 line-clamp-2 text-sm">Regu Elang dan Melati berhasil menyisihkan 20 sekolah
-                        lain dalam ajang lomba ketangkasan pramuka tahunan.</p>
-                </div>
-            </article>
-
-            <article class="flex flex-col group cursor-pointer">
-                <figure class="relative h-60 overflow-hidden rounded-2xl mb-4">
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                        alt="Suasana PTS"
-                        class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold text-teal-800 shadow-sm">
-                        Akademik
-                    </div>
-                </figure>
-                <div class="flex flex-col grow">
-                    <time datetime="2024-10-01" class="text-sm text-gray-400 font-medium mb-2">01 Oktober 2024</time>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-teal-600 transition">
-                        <a href="#">Jadwal Penilaian Tengah Semester (PTS) Ganjil TA 2024/2025</a>
-                    </h3>
-                    <p class="text-gray-600 line-clamp-2 text-sm">Persiapkan diri dengan baik, berikut adalah jadwal
-                        lengkap pelaksanaan PTS untuk kelas 1 sampai 6.</p>
-                </div>
-            </article>
+            @endforeach
         </div>
     </div>
 </section>

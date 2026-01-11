@@ -1,9 +1,8 @@
 @extends('compro.layouts.app')
 
-@section('title', "Galeri Sekolah - {$school['NAMA_SEKOLAH']}")
+@section('title', "Galeri Sekolah - " . ($school['NAMA_SEKOLAH'] ?? 'Sekolah'))
 
 @section('content')
-
     <section class="relative bg-teal-900 py-16 lg:py-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10"
             style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23facc15\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
@@ -18,123 +17,51 @@
 
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button onclick="filterGallery('semua')"
+                <button onclick="filterGallery('semua', this)"
                     class="gallery-filter-btn active px-6 py-2 rounded-full font-bold text-sm border transition bg-teal-900 text-white border-teal-900">
                     Semua
                 </button>
-                <button onclick="filterGallery('prestasi')"
+
+                @foreach($categories as $cat)
+                <button onclick="filterGallery('{{ $cat }}', this)"
                     class="gallery-filter-btn px-6 py-2 rounded-full font-bold text-sm border transition bg-white text-gray-600 border-gray-200 hover:bg-teal-50 hover:text-teal-900">
-                    Prestasi Murid
+                    {{ $cat }}
                 </button>
-                <button onclick="filterGallery('kegiatan')"
-                    class="gallery-filter-btn px-6 py-2 rounded-full font-bold text-sm border transition bg-white text-gray-600 border-gray-200 hover:bg-teal-50 hover:text-teal-900">
-                    Acara Sekolah
-                </button>
-                <button onclick="filterGallery('fasilitas')"
-                    class="gallery-filter-btn px-6 py-2 rounded-full font-bold text-sm border transition bg-white text-gray-600 border-gray-200 hover:bg-teal-50 hover:text-teal-900">
-                    Fasilitas
-                </button>
+                @endforeach
             </div>
 
             <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6" id="galleryGrid">
-
+                
+                @foreach($galleries as $item)
                 <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition"
-                    data-category="prestasi" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                        alt="Juara Umum Olimpiade Sains"
+                    data-category="{{ $item->kategori }}" onclick="openLightbox(this)">
+                    <img src="{{ asset('storage/' . $item->foto) }}" 
+                        alt="{{ $item->nama }}"
                         class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">Prestasi</span>
-                        <h3 class="text-white font-bold text-lg leading-tight">Juara Umum Olimpiade Sains</h3>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">{{ $item->kategori }}</span>
+                        <h3 class="text-white font-bold text-lg leading-tight">{{ $item->nama }}</h3>
                     </div>
                 </div>
-
-                <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition"
-                    data-category="kegiatan" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Kegiatan Belajar Mengajar Outdoor"
-                        class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">Kegiatan</span>
-                        <h3 class="text-white font-bold text-lg leading-tight">Belajar Outdoor</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition"
-                    data-category="fasilitas" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Perpustakaan Sekolah"
-                        class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">Fasilitas</span>
-                        <h3 class="text-white font-bold text-lg leading-tight">Perpustakaan Nyaman</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition"
-                    data-category="kegiatan" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                        alt="Praktikum Komputer"
-                        class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">Kegiatan</span>
-                        <h3 class="text-white font-bold text-lg leading-tight">Praktikum Komputer</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition"
-                    data-category="prestasi" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1564951434112-64d74cc2a2d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Juara Futsal Kota"
-                        class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">Prestasi</span>
-                        <h3 class="text-white font-bold text-lg leading-tight">Tim Futsal Juara Kota</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition"
-                    data-category="kegiatan" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                        alt="Kemah Pramuka"
-                        class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">Kegiatan</span>
-                        <h3 class="text-white font-bold text-lg leading-tight">Persami Pramuka</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition"
-                    data-category="fasilitas" onclick="openLightbox(this)">
-                    <img src="https://images.unsplash.com/photo-1564121211835-e88c852648ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Musholla Sekolah"
-                        class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
-                        <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">Fasilitas</span>
-                        <h3 class="text-white font-bold text-lg leading-tight">Musholla Sekolah</h3>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
 
             <div class="mt-12 text-center">
-                <button class="bg-gray-100 text-teal-900 px-8 py-3 rounded-full font-bold hover:bg-teal-100 transition">Muat
-                    Lebih Banyak</button>
+                <button id="loadMoreBtn" onclick="loadMoreGallery()" 
+                    class="bg-gray-100 text-teal-900 px-8 py-3 rounded-full font-bold hover:bg-teal-100 transition">
+                    Muat Lebih Banyak
+                </button>
+                <p id="noMoreData" class="hidden text-gray-500 mt-4 italic">Semua galeri telah ditampilkan.</p>
             </div>
+
         </div>
     </section>
 
     <div id="lightbox"
-        class="fixed inset-0 z-999 hidden bg-black/90 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+        class="fixed inset-0 z-[9999] hidden bg-black/90 backdrop-blur-sm transition-opacity duration-300 opacity-0"
         onclick="closeLightbox()">
 
         <button class="absolute top-6 right-6 text-white hover:text-yellow-400 transition transform hover:scale-110">
@@ -157,35 +84,104 @@
     </div>
 
     <script>
-        // 1. FILTER LOGIC
-        function filterGallery(category) {
-            const items = document.querySelectorAll('.gallery-item');
-            const buttons = document.querySelectorAll('.gallery-filter-btn');
+        // Variabel Global untuk Pagination
+        let currentSkip = {{ $galleries->count() }}; // Mulai skip setelah data awal (misal 6)
+        let currentFilter = 'semua';
+        let loading = false;
 
-            // Reset tombol active
+        // 1. FUNGSI FILTER
+        function filterGallery(category, btnElement) {
+            // Update UI Tombol
+            const buttons = document.querySelectorAll('.gallery-filter-btn');
             buttons.forEach(btn => {
                 btn.classList.remove('bg-teal-900', 'text-white', 'border-teal-900');
                 btn.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
             });
+            btnElement.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
+            btnElement.classList.add('bg-teal-900', 'text-white', 'border-teal-900');
 
-            // Set tombol yang diklik jadi active
-            event.target.closest('button').classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
-            event.target.closest('button').classList.add('bg-teal-900', 'text-white', 'border-teal-900');
+            // Reset Logic
+            currentFilter = category;
+            currentSkip = 0; // Reset skip ke 0 karena kita mulai dari awal untuk kategori baru
+            document.getElementById('galleryGrid').innerHTML = ''; // Kosongkan grid
+            
+            // Reset Tombol Load More
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            const noMoreData = document.getElementById('noMoreData');
+            
+            loadMoreBtn.classList.remove('hidden');
+            loadMoreBtn.innerHTML = 'Muat Lebih Banyak';
+            loadMoreBtn.disabled = false;
+            noMoreData.classList.add('hidden');
 
-            // Filter item
-            items.forEach(item => {
-                if (category === 'semua' || item.dataset.category === category) {
-                    item.classList.remove('hidden');
-                    // Animasi fade in
-                    setTimeout(() => item.classList.remove('opacity-0', 'scale-95'), 50);
-                } else {
-                    item.classList.add('hidden');
-                    item.classList.add('opacity-0', 'scale-95');
-                }
-            });
+            // Panggil Load More untuk isi data pertama kali
+            loadMoreGallery(); 
         }
 
-        // 2. LIGHTBOX LOGIC
+        // 2. FUNGSI LOAD MORE (AJAX)
+        async function loadMoreGallery() {
+            if (loading) return; // Cegah double click
+            loading = true;
+            
+            const btn = document.getElementById('loadMoreBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="animate-pulse">Memuat...</span>';
+            btn.disabled = true;
+
+            try {
+                // Panggil API endpoint (Pastikan route sudah dibuat)
+                const url = `{{ route('compro.load-more') }}?skip=${currentSkip}&category=${currentFilter}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+
+                if (data.length > 0) {
+                    const grid = document.getElementById('galleryGrid');
+                    
+                    // Loop data JSON dan buat HTML String
+                    data.forEach(item => {
+                        // Pastikan path image sesuai dengan storage link
+                        const imgPath = `/storage/${item.image}`;
+                        
+                        const html = `
+                            <div class="gallery-item group relative break-inside-avoid rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition mb-6"
+                                data-category="${item.kategori}" onclick="openLightbox(this)">
+                                <img src="${imgPath}" alt="${item.title}"
+                                    class="w-full h-auto object-cover transform group-hover:scale-110 transition duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-teal-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                                    <span class="text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">${item.kategori}</span>
+                                    <h3 class="text-white font-bold text-lg leading-tight">${item.title}</h3>
+                                </div>
+                            </div>
+                        `;
+                        // Insert HTML ke akhir grid
+                        grid.insertAdjacentHTML('beforeend', html);
+                    });
+
+                    // Update Skip untuk request berikutnya
+                    currentSkip += data.length;
+                    
+                    // Kembalikan tombol ke status normal
+                    btn.innerHTML = 'Muat Lebih Banyak';
+                    btn.disabled = false;
+                } else {
+                    // Jika data habis (array kosong)
+                    btn.classList.add('hidden');
+                    document.getElementById('noMoreData').classList.remove('hidden');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                btn.innerHTML = 'Gagal memuat, coba lagi';
+                btn.disabled = false;
+            } finally {
+                loading = false;
+            }
+        }
+
+        // 3. LIGHTBOX LOGIC (Standard)
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxTitle = document.getElementById('lightbox-title');
@@ -200,14 +196,10 @@
             lightboxTitle.innerText = title;
             lightboxCat.innerText = category;
 
-            // Show Modal
             lightbox.classList.remove('hidden');
-            // Sedikit delay untuk animasi opacity
             setTimeout(() => {
                 lightbox.classList.remove('opacity-0');
             }, 10);
-
-            // Disable scroll body
             document.body.style.overflow = 'hidden';
         }
 
@@ -215,15 +207,12 @@
             lightbox.classList.add('opacity-0');
             setTimeout(() => {
                 lightbox.classList.add('hidden');
-            }, 300); // Sesuaikan dengan duration-300 CSS
+            }, 300);
             document.body.style.overflow = 'auto';
         }
 
-        // Close on Escape key
         document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeLightbox();
-            }
+            if (event.key === "Escape") closeLightbox();
         });
     </script>
 

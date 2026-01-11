@@ -21,6 +21,7 @@ Route::controller(ComproController::class)->name('compro.')->middleware('school'
     Route::get('berita', 'news')->name('news');
     Route::get('berita/{slug}', 'readNews')->name('read-news');
     Route::get('galeri', 'gallery')->name('gallery');
+    Route::get('load-more-galeri', 'loadMore')->name('load-more');
     Route::get('info-ppdb', 'infoPPDB')->name('info-ppdb');
 });
 

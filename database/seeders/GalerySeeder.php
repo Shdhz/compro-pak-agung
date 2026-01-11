@@ -15,27 +15,33 @@ class GalerySeeder extends Seeder
     {
         Galery::create([
             'nama' => 'Juara Umum Olimpiade Sains',
-            'kategori' => 'Prestasi'
+            'kategori' => 'Prestasi',
+            'foto' => 'galleries/juara-umum-olimpiade.avif',
         ]);
         Galery::create([
             'nama' => 'Praktik Komputer',
-            'kategori' => 'Fasilitas'
+            'kategori' => 'Fasilitas',
+            'foto' => 'galleries/praktikum-komputer.avif',
         ]);
         Galery::create([
             'nama' => 'Persami Pramuka',
-            'kategori' => 'Acara Sekolah'
+            'kategori' => 'Acara Sekolah',
+            'foto' => 'galleries/persami-pramuka.avif',
         ]);
         Galery::create([
             'nama' => 'Belajar Outdoor',
-            'kategori' => 'Acara Sekolah'
+            'kategori' => 'Acara Sekolah',
+            'foto' => 'galleries/belajar-outdoor.avif',
         ]);
         Galery::create([
             'nama' => 'Musholla Sekolah',
-            'kategori' => 'Fasilitas'
+            'kategori' => 'Fasilitas',
+            'foto' => 'galleries/musholla-sekolah.avif',
         ]);
         Galery::create([
             'nama' => 'Perpustakaan Nyaman',
-            'kategori' => 'Fasilitas'
+            'kategori' => 'Fasilitas',
+            'foto' => 'galleries/perpustakaan-nyaman.avif',
         ]);
     }
 }

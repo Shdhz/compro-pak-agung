@@ -14,32 +14,32 @@ class FacilitySeeder extends Seeder
     public function run(): void
     {
         Facility::create([
-            'thumbnail' => null,
+            'thumbnail' => 'facilities/ruang-kelas-digital.avif',
             'badge' => 'AC & Multimedia',
             'nama' => 'Ruang Kelas Digital'
         ]);
         Facility::create([
-            'thumbnail' => null,
+            'thumbnail' => 'facilities/laboratorium-komputer.avif',
             'badge' => '1 Siswa 1 PC',
             'nama' => 'Laboratorium Komputer'
         ]);
         Facility::create([
-            'thumbnail' => null,
+            'thumbnail' => 'facilities/perpustakaan.avif',
             'badge' => 'Lengkap & Nyaman',
             'nama' => 'Perpustakaan'
         ]);
         Facility::create([
-            'thumbnail' => null,
+            'thumbnail' => 'facilities/musholla-sekolah.avif',
             'badge' => 'Ibadah Nyaman',
             'nama' => 'Musholla Sekolah'
         ]);
         Facility::create([
-            'thumbnail' => null,
+            'thumbnail' => 'facilities/uks-modern.avif',
             'badge' => 'Standar Medis',
             'nama' => 'UKS Modern'
         ]);
         Facility::create([
-            'thumbnail' => null,
+            'thumbnail' => 'facilities/lapangan-olahraga.avif',
             'badge' => 'Outdoor Luas',
             'nama' => 'Lapangan Olahraga'
         ]);
