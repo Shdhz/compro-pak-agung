@@ -122,7 +122,7 @@
     <div x-show="mobileMenuOpen" style="display: none;" class="md:hidden bg-teal-800 border-t border-teal-600">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
 
-            <a href="{{ url('/') }}"
+            <a href="{{ route('compro.home') }}"
                 class="{{ request()->is('/') ? 'bg-teal-900 text-yellow-300 font-bold' : 'hover:bg-teal-600' }} block px-3 py-2 rounded-md transition">Beranda</a>
 
             <div x-data="{ subOpen: false }">
@@ -135,19 +135,18 @@
                     </svg>
                 </button>
                 <div x-show="subOpen" class="pl-6 space-y-1 bg-teal-900/50 py-2">
-                    <a href="{{ url('profil/tentang-kami') }}"
+                    <a href="{{ route('compro.about-us') }}"
                         class="{{ request()->is('profil/tentang-kami') ? 'text-yellow-300 font-bold' : 'text-teal-100 hover:text-yellow-300' }} block px-3 py-2 text-sm">Tentang
                         Kami</a>
-                    <a href="{{ url('profil/visi-misi') }}"
-                        class="{{ request()->is('profil/visi-misi') ? 'text-yellow-300 font-bold' : 'text-teal-100 hover:text-yellow-300' }} block px-3 py-2 text-sm">Visi
-                        & Misi</a>
+                    <a href="{{ route('compro.teacher') }}"
+                        class="{{ request()->is('profil/tenaga-pendidik') ? 'text-yellow-300 font-bold' : 'text-teal-100 hover:text-yellow-300' }} block px-3 py-2 text-sm">Guru & Staff</a>
                 </div>
             </div>
 
-            <a href="{{ url('berita') }}"
+            <a href="{{ route('compro.news') }}"
                 class="{{ request()->is('berita*') ? 'bg-teal-900 text-yellow-300 font-bold' : 'hover:bg-teal-600' }} block px-3 py-2 rounded-md transition">Berita</a>
-            <a href="{{ url('ppdb') }}"
-                class="{{ request()->is('ppdb*') ? 'bg-teal-900 text-yellow-300 font-bold' : 'hover:bg-teal-600' }} block px-3 py-2 rounded-md transition">Info
+            <a href="{{ route('compro.info-ppdb') }}"
+                class="{{ request()->is('info-ppdb*') ? 'bg-teal-900 text-yellow-300 font-bold' : 'hover:bg-teal-600' }} block px-3 py-2 rounded-md transition">Info
                 PPDB</a>
         </div>
     </div>
